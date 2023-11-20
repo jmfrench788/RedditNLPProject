@@ -15,7 +15,7 @@ from utils.b2 import B2
 # ------------------------------------------------------
 #                      APP CONSTANTS
 # ------------------------------------------------------
-REMOTE_DATA = 'C:/Users/julia/OneDrive/Documents/simple_streamlit/RedditWordCount'
+REMOTE_DATA = 'RedditWordCount'
 
 
 # ------------------------------------------------------
