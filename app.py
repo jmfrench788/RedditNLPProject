@@ -9,10 +9,13 @@ from dotenv import load_dotenv
 from utils.b2 import B2
 
 
+#Cannot connect to endpoint. When I actually go to it, it says "Unauthenticated requests are not allowed for this api"
+#So, I tried to do this without b2 for now
+
 # ------------------------------------------------------
 #                      APP CONSTANTS
 # ------------------------------------------------------
-REMOTE_DATA = 'seattle_home_prices.csv'
+REMOTE_DATA = 'C:/Users/julia/OneDrive/Documents/simple_streamlit/RedditWordCount'
 
 
 # ------------------------------------------------------
@@ -21,123 +24,90 @@ REMOTE_DATA = 'seattle_home_prices.csv'
 load_dotenv()
 
 # load Backblaze connection
-b2 = B2(endpoint=os.environ['B2_ENDPOINT'],
-        key_id=os.environ['B2_KEYID'],
-        secret_key=os.environ['B2_APPKEY'])
+#b2 = B2(endpoint=os.environ['B2_ENDPOINT'],
+        #key_id=os.environ['B2_KEYID'],
+        #secret_key=os.environ['B2_APPKEY'])
 
 
 # ------------------------------------------------------
 #                         APP
 # ------------------------------------------------------
-st.write(
-'''
-## Seattle Home Prices
-We pull data from our Backblaze storage bucket, and render it in Streamlit using `st.dataframe()`.
-''')
+st.write()
 
-b2.set_bucket(os.environ['B2_BUCKETNAME'])
+#b2.set_bucket(os.environ['B2_BUCKETNAME'])
 
-df_prices = b2.to_df(REMOTE_DATA)
-st.dataframe(df_prices)
+#df_words = b2.to_df(REMOTE_DATA)
+df_words = pd.read_csv(REMOTE_DATA)
+df_words.rename(columns={'Unnamed: 0': 'word'}, inplace=True)
+
+df_allwords = df_words.set_index('word')
+df_allwords.sort_index()
+
+#df_tech=df_allwords.loc[df_allwords.index.isin(['phone','computer','media','video','videos','text','spotify','gmail','netflix','wifi','internet','password','passwords','youtube','email','app','ads','tv','movie','screen'])]
+#st.dataframe(df_tech)
+
+st.dataframe(df_allwords)
+
 
 # ------------------------------
 # PART 1 : Filter Data
 # ------------------------------
 
-features = ['SQUARE FEET', 'BEDS', 'LATITUDE', 'LONGITUDE']
-target = 'PRICE'
+#keeps saying features not in index
+#features = df_tech.loc[df_allwords.index.isin(['computer','phone','media','video','videos','text','spotify','gmail','netflix','wifi','internet','password','passwords','youtube','email','app','ads','tv','movie','screen'])]
+#target = 'sum'
 
-df_prices = df_prices[features + [target]]
-df_prices.dropna(inplace=True)
+#df_TechWords = df_allwords[features + [target]]
+#df_TechWords.dropna(inplace=True)
 
 
-# ------------------------------
-# PART 2 : Plot
-# ------------------------------
-
-st.write(
-'''
-### Graphing and Buttons
-Lets graph some of our data with matplotlib. We can also add buttons to add interactivity to our app.
-'''
-)
+word_choice= st.multiselect('Select Words', df_allwords.index, default=None, key=None, help=None, max_selections=None, placeholder="Choose an option", disabled=False, label_visibility="visible")
+df_choice= pd.DataFrame(word_choice)
+df_update= df_allwords[df_allwords.index.isin(df_choice[0])]
+st.write(df_update)
 
 fig, ax = plt.subplots()
 
-ax.hist(df_prices['PRICE'])
-ax.set_title('Distribution of House Prices in $100,000s')
+ax.bar(df_update.index,df_update['sum'])
+ax.set_title('Count of Words')
 
 show_graph = st.checkbox('Show Graph', value=True)
 
 if show_graph:
     st.pyplot(fig)
 
-# ------------------------------
-# PART 3 : Mapping and Filtering
-# ------------------------------
+
+st.write()
+
+#Choose by category
+df_categories=['Romance','Work','Technology','Family','Frequency','Health','School']
+category_choice= st.selectbox('Select A Category', df_categories, placeholder="Choose an option", disabled=False, label_visibility="visible")
+st.write("Category: ",category_choice)
+
+#Get words based on category
+def ChooseCat(category_chosen):
+    category = category_chosen
+    empty = []
+    df_catWords = pd.DataFrame(empty)
+    if category == 'Technology':
+        df_catWords=df_allwords.loc[df_allwords.index.isin(['phone','computer','media','video','videos','text','spotify','gmail','netflix','wifi','internet','password','passwords','youtube','email','app','ads','tv','movie','screen'])]
+    #if category == 'Romance':
+        #df_catWords=df_allwords.loc[df_allwords.index.isin(['phone','computer','media','video','videos','text','spotify','gmail','netflix','wifi','internet','password','passwords','youtube','email','app','ads','tv','movie','screen'])]
+
+    return df_catWords
+
+df_categoryWords = ChooseCat(category_choice)
+st.write("Total Sum = ", sum(df_categoryWords['sum']))
+st.write(df_categoryWords)
+
+#Graph
+fig2, ax2 = plt.subplots()
+
+ax2.bar(df_categoryWords.index,df_categoryWords['sum'])
+ax2.set_title('Count of Words')
+
+st.pyplot(fig2)
+
+
     
-st.write(
-'''
-### Mapping and Filtering Our Data
-We can also use Streamlit's built in mapping functionality.
-We can use a slider to filter for houses within a particular price range as well.
-'''
-)
 
-price_input = st.slider('House Price Filter', 
-                        int(df_prices['PRICE'].min()), 
-                        int(df_prices['PRICE'].max()), 
-                        100000)
-
-price_filter = df_prices['PRICE'] < price_input
-st.map(df_prices.loc[price_filter, ['LATITUDE', 'LONGITUDE']])
-
-# ------------------------------
-# PART 4 : Train Model
-# ------------------------------
-
-st.write(
-'''
-## Train a linear Regression Model
-Create a model to predict house price from sqft and number of beds
-'''
-)
-
-# There is a better way to do this ...
-from sklearn.linear_model import LinearRegression
-
-features = ['SQUARE FEET', 'BEDS']
-target = 'PRICE'
-
-df = df_prices[features + [target]].copy()
-df.dropna(inplace=True)
-
-X = df[features]
-y = df[target]
-
-lm = LinearRegression()
-
-lm.fit(X, y)
-
-
-# ------------------------------
-# PART 5 : Predict on New Data
-# ------------------------------
-
-st.write(
-'''
-## Make predictions with the trained model from user input
-'''
-)
-
-sqrft = st.number_input('Square Footage of House', value=2000)
-beds = st.number_input('Number of Bedrooms', value=3)
-
-# model was trained on pandas data, so column names are best
-input_data = pd.DataFrame({'SQUARE FEET': [sqrft], 'BEDS': [beds]})
-
-# extract the first (and only) prediction value
-pred = lm.predict(input_data)[0]
-st.write(
-f'Predicted Sale Price of House: ${int(pred):,}'
-)

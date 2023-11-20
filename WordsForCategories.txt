@@ -1,0 +1,7 @@
+Romance: 
+Frequency: 'always', 'never', 'sometimes','often', 'rarely','usually','hardly','occasionally','seldom','normally','constantly','regularly','frequently','daily','weekly','yearly','annually','monthly','everyday','eventually'
+Technology: 'computer','computers','phone','phones','media','video','videos','text','texting','spotify','gmail','netflix','wifi','internet','password','passwords','youtube','email','app','ads','tv','television','movie','screen'
+Work:
+Family:
+School:
+Health:

@@ -15,6 +15,8 @@ class B2(object):
         ----------
         endpoint : str
             The endpoint, usually starting with "https://s3. ..."
+            # 
+    
         key_id : str
             The "Key ID" for the application key from Backblaze.
         secret_key : str
