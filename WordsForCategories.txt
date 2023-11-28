@@ -5,3 +5,4 @@ Work:
 Family: 'family', 'kids', 'marriage','marry'
 School:
 Health:
+Money:

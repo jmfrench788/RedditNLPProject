@@ -8,13 +8,6 @@ from dotenv import load_dotenv
 
 from utils.b2 import B2
 
-st.title('Reddit: r/LifeProTips ')
-
-with open('style.css') as f:
-    css = f.read()
-
-st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
-
 
 #Cannot connect to endpoint. When I actually go to it, it says "Unauthenticated requests are not allowed for this api"
 #So, I tried to do this without b2 for now
@@ -50,23 +43,9 @@ df_words.rename(columns={'Unnamed: 0': 'word'}, inplace=True)
 df_allwords = df_words.set_index('word')
 df_allwords.sort_index()
 
-#df_tech=df_allwords.loc[df_allwords.index.isin(['phone','computer','media','video','videos','text','spotify','gmail','netflix','wifi','internet','password','passwords','youtube','email','app','ads','tv','movie','screen'])]
-#st.dataframe(df_tech)
-
 st.dataframe(df_allwords)
 
-
-# ------------------------------
-# PART 1 : Filter Data
-# ------------------------------
-
-#keeps saying features not in index
-#features = df_tech.loc[df_allwords.index.isin(['computer','phone','media','video','videos','text','spotify','gmail','netflix','wifi','internet','password','passwords','youtube','email','app','ads','tv','movie','screen'])]
-#target = 'sum'
-
-#df_TechWords = df_allwords[features + [target]]
-#df_TechWords.dropna(inplace=True)
-
+#Select by words
 
 word_choice= st.multiselect('Select Words', df_allwords.index, default=None, key=None, help=None, max_selections=None, placeholder="Choose an option", disabled=False, label_visibility="visible")
 df_choice= pd.DataFrame(word_choice)

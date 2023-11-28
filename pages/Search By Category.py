@@ -25,7 +25,17 @@ def ChooseCat(category_chosen):
         df_catWords=df_allwords.loc[df_allwords.index.isin(['link','file','data','cable','calling','call', 'calls', 'windows','online','phone','computer','media','video','videos','text','spotify','gmail','netflix','wifi','internet','password','passwords','youtube','email','app','ads','tv','movie','movies','screen'])]
     if category == 'Romance':
         df_catWords=df_allwords.loc[df_allwords.index.isin(['love','loved','boyfriend','girlfriend','marriage','marry','romance','date','bf','gf','kiss','sex','husband','wife','partner','kissing', 'dating','ex'])]
-
+    if category == 'Work':
+        df_catWords=df_allwords.loc[df_allwords.index.isin(['employee','employer','job','work','working','boss','hours','office'])]
+    if category == 'Family':
+        df_catWords=df_allwords.loc[df_allwords.index.isin(['wife','husband','kids','kid','baby','father','mother','sister','family','brother','cousin'])]
+    if category == 'Frequency':
+        df_catWords=df_allwords.loc[df_allwords.index.isin(['always', 'never', 'sometimes','often', 'rarely','usually','hardly','occasionally','seldom','normally','constantly','regularly','frequently','daily','weekly','yearly','annually','monthly','everyday','eventually'])]
+    if category == 'Health':
+       df_catWords=df_allwords.loc[df_allwords.index.isin(['health','age','hospital','gym','unhealthy','body','run','exercise','diet','nutrition','food','nutritional','doctor','medicine','medical','ambulance','covid'])]
+    if category == 'School':
+       df_catWords=df_allwords.loc[df_allwords.index.isin(['school','class','homework','teacher','grade','grades','test','exam'])]
+    #Add in Money and check categories
     return df_catWords
 
 #Choose by category
