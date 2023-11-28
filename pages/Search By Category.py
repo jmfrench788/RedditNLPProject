@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 from utils.b2 import B2
 
-REMOTE_DATA = 'RedditWordCount'
+REMOTE_DATA = 'https://github.com/jmfrench788/RedditNLPProject/blob/2b9af61ebd90e5f37ad49427b5864bab24550ae2/RedditWordCount'
 
 df_words = pd.read_csv(REMOTE_DATA)
 df_words.rename(columns={'Unnamed: 0': 'Word'}, inplace=True)
