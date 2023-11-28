@@ -32,7 +32,7 @@ df_allwords.sort_index()
 word_choice= st.multiselect('Select Words', df_allwords.index, default=None, key=None, help=None, max_selections=None, placeholder="Choose an option", disabled=False, label_visibility="visible")
 df_choice= pd.DataFrame(word_choice)
 if df_choice.empty:
-    print("Select one or more words")
+    st.write("Select one or more words")
 else:
     df_update= df_allwords[df_allwords.index.isin(df_choice[0])]
     st.write(df_update)
