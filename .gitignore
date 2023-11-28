@@ -8,7 +8,7 @@ __pycache__*
 scratch.ipynb
 data*
 *.pickle
-.yml
+
 
 # macOS
 *.DS_Store
