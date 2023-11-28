@@ -8,6 +8,13 @@ from dotenv import load_dotenv
 
 from utils.b2 import B2
 
+st.title('Reddit: r/LifeProTips ')
+
+with open('style.css') as f:
+    css = f.read()
+
+st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
+
 
 #Cannot connect to endpoint. When I actually go to it, it says "Unauthenticated requests are not allowed for this api"
 #So, I tried to do this without b2 for now
