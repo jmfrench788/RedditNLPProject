@@ -15,10 +15,6 @@ REMOTE_DATA = 'https://raw.githubusercontent.com/jmfrench788/RedditNLPProject/ma
 
 
 
-# load Backblaze connection
-#b2 = B2(endpoint=os.environ['B2_ENDPOINT'],
-        #key_id=os.environ['B2_KEYID'],
-        #secret_key=os.environ['B2_APPKEY'])
 
 df_words = pd.read_csv(REMOTE_DATA)
 df_words.rename(columns={'Unnamed: 0': 'Word'}, inplace=True)
@@ -37,8 +33,9 @@ else:
     df_update= df_allwords[df_allwords.index.isin(df_choice[0])]
     st.write(df_update)
     fig, ax = plt.subplots()
-    ax.bar(df_update.index,df_update['Sum'])
+    ax.barh(df_update.index,df_update['Sum'])
     ax.set_title('Count of Words')
+    ax.invert_yaxis()
 
     show_graph = st.checkbox('Show Graph', value=True)
 

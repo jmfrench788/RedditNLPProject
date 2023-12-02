@@ -1,8 +1,20 @@
-Romance: 'love','boyfriend','girlfriend','marriage','marry','romance','date','bf','gf','kiss','sex','husband','wife','partner','kissing'
+Relationships: 'relationship','boyfriend','girlfriend','bf','gf','husband','wife','partner','friend','employee','employer','boss','kids','kid','baby','father','mother','sister','family','brother','cousin','child','member','neighbors'
+Romance: 'single','love','loved','boyfriend','girlfriend','marriage','marry','romance','date','bf','gf','kiss','sex','husband','wife','partner','kissing','wedding'
 Frequency: 'always', 'never', 'sometimes','often', 'rarely','usually','hardly','occasionally','seldom','normally','constantly','regularly','frequently','daily','weekly','yearly','annually','monthly','everyday','eventually'
-Technology: 'computer','computers','phone','phones','media','video','videos','text','texting','spotify','gmail','netflix','wifi','internet','password','passwords','youtube','email','app','ads','tv','television','movie','screen'
-Work:
-Family: 'family', 'kids', 'marriage','marry'
-School:
-Health:
-Money:
+Technology: 'computer','computers','phone','phones','text','texting','spotify','gmail','netflix','wifi','internet','password','passwords','youtube','email','app','ads','tv','television','movie','screen','photo', 'media','video','videos'
+Entertainment: 'media','video','videos', 'spotify', 'netflix', 'youtube', 'app', 'tv','television','movie','hobby','cable'
+Work: 'employee','employer','job','work','working','boss','hours','office','company','manager','store','position','salary','staff','volunteer','resume','presentation','employers,'employees','workplace','product','budget','task', 'transfer','companies','sale','security','hr','interview','opportunity','career'
+Family: 'wife','husband','kids','kid','baby','father','mother','sister','family','brother','cousin', 'home','children','child'
+School: 'school','class','homework','teacher','grade','grades','test','exam','college','presentation','book', 'transfer'
+Health: 'health','age','hospital','gym','unhealthy','body','run','exercise','diet','nutrition','food','nutritional','doctor','medicine','medical','ambulance','covid','water','eat','walk','drink','mental','brain','sleep','meal','emergency','eating','memory','mood','drinking','physical','mouth','environment','air','walking','stress','weight','shower','cold'
+Money: 'money','buy', 'house', 'car', 'buying', 'pay', 'save', 'free','clothes','college','gift','gifts','account','trip','trips','cost','vacation','salary','cheaper','restaurant','charge','card','cheap','vehicle','homeless','poor','bill','donate','paying','accounts','budget','transfer','sale','discount'
+Pets: 'dog', 'dogs','cat','cats','pet','pets','vet','animal'
+Events:'party','christmas','wedding','trip','trips','night','vacation','date','event','emergency','presentation','flights'
+
+oil 
+cream
+oven
+covid 
+cookies
+jar
+bird 
