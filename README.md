@@ -1,1 +1,1 @@
-I was unable to get the endpoint for B2 working, so I did the app without it for now. I have two graphs, one where a person can select multiple words and the other where a person can select words by category. So far, I only have the "Technology" category done.
+
