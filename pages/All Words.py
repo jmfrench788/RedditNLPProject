@@ -27,4 +27,4 @@ df_allwords.sort_index()
 #df_tech=df_allwords.loc[df_allwords.index.isin(['phone','computer','media','video','videos','text','spotify','gmail','netflix','wifi','internet','password','passwords','youtube','email','app','ads','tv','movie','screen'])]
 #st.dataframe(df_tech)
 
-st.dataframe(df_allwords, height=5000)
+st.dataframe(df_allwords, height=10000)
