@@ -9,6 +9,10 @@ import streamlit as st
 
 from utils.b2 import B2
 
+with open('style.css') as f:
+    css = f.read()
+
+st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 REMOTE_DATA = 'https://raw.githubusercontent.com/jmfrench788/RedditNLPProject/main/RedditWordCount'
 
